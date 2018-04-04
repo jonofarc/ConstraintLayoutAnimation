@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/mugello_IV"
+        android:adjustViewBounds="true"
+        android:src="@drawable/mugello"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#FFF"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:src="@drawable/ic_perm_device_information_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#181818"
+        android:gravity="center"
+        android:paddingBottom="80dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:text="The Mugello is a historic region and valley in northern Tuscany, in Italy. It is located to the north of the city of Florence and consists of the northernmost portion of the Metropolitan City of Florence.  It is connected to the separate Santerno river valley by the Futa Pass."
+        android:textColor="#FFFF"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mugello_IV"
+        tools:layout_editor_absoluteX="0dp" />
+
+</android.support.constraint.ConstraintLayout>
