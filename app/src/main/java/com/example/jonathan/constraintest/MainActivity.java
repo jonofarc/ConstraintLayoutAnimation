@@ -27,48 +27,45 @@ public class MainActivity extends AppCompatActivity {
 
         constraintSet1.clone(this, R.layout.activity_main);
         constraintSet2.clone(this, R.layout.activity_main_alt);
-        ConstraintLayout mConstraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
+        ConstraintLayout mConstraintLayout = findViewById(R.id.constraintLayout);
 
 
         ChangeBounds transition = new ChangeBounds();
         transition.setInterpolator(new AnticipateOvershootInterpolator(1.0f));
         transition.setDuration(800);
 
-
-        findViewById(R.id.FAB).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    y1 = event.getY();
-                    return true;
-                }
-                if(event.getAction() == MotionEvent.ACTION_UP){
-                    y2 = event.getY();
-                    float deltaY = y2 - y1;
-                    if (Math.abs(deltaY) > MIN_DISTANCE)
-                    {
-                        if(y1>y2){
-                            TransitionManager.beginDelayedTransition(mConstraintLayout,transition);
-                            constraintSet2.applyTo(mConstraintLayout); // set new constraints
-                            phase = !phase;
-                        }else{
-                            TransitionManager.beginDelayedTransition(mConstraintLayout,transition);
-                            constraintSet1.applyTo(mConstraintLayout); // set new constraints
-                            phase = !phase;
-                        }
-
+        //basic swipe and touch handler
+        findViewById(R.id.FAB).setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                y1 = event.getY();
+                return true;
+            }
+            if(event.getAction() == MotionEvent.ACTION_UP){
+                y2 = event.getY();
+                float deltaY = y2 - y1;
+                if (Math.abs(deltaY) > MIN_DISTANCE)
+                {
+                    if(y1>y2){
+                        TransitionManager.beginDelayedTransition(mConstraintLayout,transition);
+                        constraintSet2.applyTo(mConstraintLayout); // set new constraints
+                        phase = !phase;
                     }else{
                         TransitionManager.beginDelayedTransition(mConstraintLayout,transition);
-                        if (phase = !phase) {
-                            constraintSet1.applyTo(mConstraintLayout); // set new constraints
-                        }  else {
-                            constraintSet2.applyTo(mConstraintLayout); // set new constraints
-                        }
+                        constraintSet1.applyTo(mConstraintLayout); // set new constraints
+                        phase = !phase;
                     }
-                    return true;
+
+                }else{
+                    TransitionManager.beginDelayedTransition(mConstraintLayout,transition);
+                    if (phase = !phase) {
+                        constraintSet1.applyTo(mConstraintLayout); // set new constraints
+                    }  else {
+                        constraintSet2.applyTo(mConstraintLayout); // set new constraints
+                    }
                 }
-                return false;
+                return true;
             }
+            return false;
         });
 
 
